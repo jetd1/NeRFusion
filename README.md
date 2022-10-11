@@ -76,16 +76,24 @@ data
 If a video is all you have (no camera parameters). You should install `ffmpeg` and `colmap`. Then follow the instructions as introduced in [instant-ngp](https://github.com/NVlabs/instant-ngp/blob/master/scripts/colmap2nerf.py) to generate the `transformas.json`.
 
 ## Inference using Pre-trained Network
-Pre-trained weights upload (Oct 12).
+```bash
+python train.py --dataset_name scannet --root_dir DIR_TO_SCANNET_SCENE0000_01 --exp_name EXP_NAME --ckpt_path PATH_TO_G_CKPT
+```
+Please find the pre-trained weights for networks [here](https://drive.google.com/file/d/1YjwO1Q2CAn7tdnwVzDgL_iEH_m7cSiHW/view?usp=sharing). Pre-trained config and inference-only scripts will be updated soon.
 
 ### Per-Scene Optimization
-Note: currently this script trains model from scratch. We are updating generalized pipeline (before Oct 11).
+Note: currently this script trains model from scratch. We are updating generalized pipeline.
 ```bash
-python train.py --dataset_name scannet --root_dir DIR_TO_SCANNET_SCENE --exp_name EXP_NAME
+python train.py --dataset_name DATASET_NAME --root_dir DIR_TO_SCANNET_SCENE --exp_name EXP_NAME
+```
+
+You can test using our [sample data](https://drive.google.com/file/d/1vy5whVQbMcyKTK5W0LJsTlDgCS7wGih7/view?usp=sharing) on ScanNet. You can also try evaluation using our [sample checkpoint](https://drive.google.com/file/d/1wHSPMSGhy1TVSWCYttz2JDNUTMTeI9w0/view?usp=sharing) on ScanNet:
+```bash
+python train.py --dataset_name scannet --root_dir DIR_TO_SCANNET_SCENE0000_01 --exp_name EXP_NAME --val_only --ckpt_path PATH_TO_SCANNET_SCENE0000_01_CKPT
 ```
 
 ## Training Procedure
-TODO (before Oct 12)
+TODO
 
 
 ## Acknowledgement

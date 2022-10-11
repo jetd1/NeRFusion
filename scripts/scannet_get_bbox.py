@@ -17,5 +17,5 @@ if __name__ == '__main__':
     xyz_max = xyzs.max(axis=0)
 
     output = np.array([xyz_min, xyz_max])
-    np.savetxt(os.path.join(root_dir, 'cam_box.txt'))
+    np.savetxt(os.path.join(root_dir, 'cam_bbox.txt'), output)
 

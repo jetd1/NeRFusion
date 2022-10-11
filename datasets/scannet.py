@@ -9,6 +9,8 @@ from .color_utils import read_image
 
 from .base import BaseDataset
 
+SCANNET_FAR = 2.0
+
 
 class ScanNetDataset(BaseDataset):
     def __init__(self, root_dir, split='train', downsample=1.0, **kwargs):
@@ -42,17 +44,19 @@ class ScanNetDataset(BaseDataset):
                 frames = f.read().strip().split()
                 frames = frames[:80]
 
+        cam_bbox = np.loadtxt(os.path.join(self.root_dir, f"cam_bbox.txt"))
+        sbbox_scale = (cam_bbox[1] - cam_bbox[0]).max() + 2 * SCANNET_FAR
+        sbbox_shift = cam_bbox.mean(axis=0)
+
         print(f'Loading {len(frames)} {split} images ...')
         for frame in tqdm(frames):
             c2w = np.loadtxt(os.path.join(self.root_dir, f"pose/{frame}.txt"))[:3]
 
             # add shift
-            c2w[0, 3] -= 4.2
-            c2w[1, 3] -= 4.7
-            c2w[2, 3] -= 1.4
-
-            # TODO: determine scale
-            c2w[:, 3] /= 8.0
+            c2w[0, 3] -= sbbox_shift[0]
+            c2w[1, 3] -= sbbox_shift[1]
+            c2w[2, 3] -= sbbox_shift[2]
+            c2w[:, 3] /= sbbox_scale
 
             self.poses += [c2w]
 
