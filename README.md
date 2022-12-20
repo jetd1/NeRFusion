@@ -96,6 +96,11 @@ python train.py --dataset_name scannet --root_dir DIR_TO_SCANNET_SCENE0000_01 --
 TODO
 
 
+## Performance
+
+We applied optimization on large-scale scenes in this code base, and the performance may not exactly match all numbers in the paper. Our test results with this code base is reported here. For generalized no per-scene optimization setting, we achieve 23.35/0.844/0.333 on ScanNet eight scenes, 26.23/0.925/0.169 on DTU, and 24.21/0.888/0.129 on NeRF Synthetic. For per-scene optimization setting, we achieve 27.78/0.917/0.199 on ScanNet eight scenes, 31.76/0.961/0.118 on DTU, and 29.88/0.949/0.099 on NeRF Synthetic.
+
+
 ## Acknowledgement
 Our repo is developed based on [nerf_pl](https://github.com/kwea123/nerf_pl), [NeuralRecon](https://github.com/zju3dv/NeuralRecon) and [MVSNeRF](https://github.com/apchenstu/mvsnerf). Please also consider citing the corresponding papers. 
 
