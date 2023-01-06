@@ -6,15 +6,7 @@ Primary contact: [Xiaoshuai Zhang](https://jetd1.github.io/NeRFusion-Web/)
 
 ## Note
 
-This `dev` branch is currently **under development**. We will finish and merge this into `main` in a few days. This is a re-development of the original NeRFusion code based heavily on [nerf_pl](https://github.com/kwea123/nerf_pl), [NeuralRecon](https://github.com/zju3dv/NeuralRecon), [MVSNeRF](https://github.com/apchenstu/mvsnerf). We thank the authors for sharing their code. The model released in this repo is optimized for large-scale scenes further compared to the CVPR submission. A changelist will be provided. Current progress:
-
-- [x] Create initial repo and organize related files.
-- [x] Test code for optimization setting.
-- [x] Pretrained weights for example large scenes.
-- [ ] Pre-processed dataset release.
-- [ ] Test code for generalization setting.
-- [ ] All training procedures for all datasets.
-- [ ] Interactive GUI.
+This `dev` branch is currently **under development**. We will finish and merge this into `main` in a few days. This is a re-development of the original NeRFusion code based heavily on [nerf_pl](https://github.com/kwea123/nerf_pl), [NeuralRecon](https://github.com/zju3dv/NeuralRecon), [MVSNeRF](https://github.com/apchenstu/mvsnerf). We thank the authors for sharing their code. The model released in this repo is optimized for large-scale scenes further compared to the CVPR submission. A changelist will be provided.
 
 
 ## Introduction
@@ -79,7 +71,7 @@ If a video is all you have (no camera parameters). You should install `ffmpeg` a
 ```bash
 python train.py --dataset_name scannet --root_dir DIR_TO_SCANNET_SCENE0000_01 --exp_name EXP_NAME --ckpt_path PATH_TO_G_CKPT
 ```
-Please find the pre-trained weights for networks [here](https://drive.google.com/file/d/1YjwO1Q2CAn7tdnwVzDgL_iEH_m7cSiHW/view?usp=sharing). Pre-trained config and inference-only scripts will be updated soon.
+Please find the pre-trained weights for networks [here](https://drive.google.com/file/d/1YjwO1Q2CAn7tdnwVzDgL_iEH_m7cSiHW/view?usp=sharing).
 
 ### Per-Scene Optimization
 Note: currently this script trains model from scratch. We are updating generalized pipeline.
@@ -93,7 +85,29 @@ python train.py --dataset_name scannet --root_dir DIR_TO_SCANNET_SCENE0000_01 --
 ```
 
 ## Training Procedure
-TODO
+
+Please download and organize the datasets in the following manner:
+```
+├──data/
+    ├──DTU/
+    ├──google_scanned_objects/
+    ├──ScanNet/
+```
+
+For google scanned objects, we used [renderings](https://drive.google.com/file/d/1w1Cs0yztH6kE3JIz7mdggvPGCwIKkVi2/view?usp=sharing) from IBRNet. Download with:
+
+```
+gdown https://drive.google.com/uc?id=1w1Cs0yztH6kE3JIz7mdggvPGCwIKkVi2
+unzip google_scanned_objects_renderings.zip
+```
+
+For DTU and ScanNet, please use the official toolkits for downloading and processing of the data, and unpack the root directory to the `data` folder mentioned above. Train with:
+
+```bash
+python train.py --train_root_dir DIR_TO_DATA --exp_name EXP_NAME
+```
+
+See `opt.py` for more options.
 
 
 ## Performance
